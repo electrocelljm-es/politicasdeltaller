@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELECTROCELL JM ES - Condiciones de Servicio</title>
+    <style>
+        /* ============================================ */
+        /* RESET Y ESTILOS BASE */
+        /* ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #E8F4FD;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ============================================ */
+        /* CONTENEDOR DE IMÁGENES */
+        /* ============================================ */
+        .gallery {
+            display: grid;
+            gap: 30px;
+            width: 100%;
+            max-width: 1300px;
+            justify-items: center;
+            align-items: start;
+        }
+
+        /* ============================================ */
+        /* CADA BLOQUE: IMAGEN + ENCABEZADO + PIE      */
+        /* AMARRADO PARA QUE NO SE DISTORSIONE         */
+        /* ============================================ */
+        .gallery-item {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            background: transparent;
+            container-type: inline-size;
+        }
+
+        /* ============================================ */
+        /* ENCABEZADO DE CADA IMAGEN (texto negro) */
+        /* ============================================ */
+        .item-header {
+            width: 100%;
+            text-align: center;
+            padding: 10px 5px 8px 5px;
+            color: #000000;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: transparent;
+            border-bottom: 2px solid rgba(74, 144, 217, 0.3);
+            margin-bottom: 5px;
+            flex-shrink: 0;
+        }
+
+        .item-header span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* ============================================ */
+        /* CONTENEDOR DE LA IMAGEN (SIN BORDES) */
+        /* ============================================ */
+        .image-wrapper {
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            /* SIN border-radius, SIN sombra - esquinas completas */
+            box-shadow: none;
+        }
+
+        /* ============================================ */
+        /* PIE DE CADA IMAGEN (texto BLANCO) */
+        /* ============================================ */
+        .item-footer {
+            width: 100%;
+            text-align: center;
+            padding: 8px 5px 10px 5px;
+            color: #FFFFFF;
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+            font-weight: 500;
+            background: rgba(26, 58, 92, 0.7);
+            /* SIN border-radius en las esquinas */
+            border-radius: 0;
+            margin-top: 5px;
+            backdrop-filter: blur(2px);
+            flex-shrink: 0;
+        }
+
+        .item-footer input {
+            background: transparent;
+            border: none;
+            border-bottom: 1.5px dashed rgba(255, 255, 255, 0.6);
+            color: #FFFFFF;
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+            font-weight: 500;
+            text-align: center;
+            padding: 2px 8px;
+            width: clamp(100px, 15vw, 160px);
+            outline: none;
+            font-family: inherit;
+        }
+
+        .item-footer input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .item-footer input:focus {
+            border-bottom-color: #FFFFFF;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE: MÓVIL (1 columna) */
+        /* ============================================ */
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE: TABLET (2-3 columnas) */
+        /* ============================================ */
+        @media (min-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 850px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE: ESCRITORIO (4-5 columnas) */
+        /* ============================================ */
+        @media (min-width: 1100px) {
+            .gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .gallery {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        /* ============================================ */
+        /* PIE DE PÁGINA GENERAL (estilo del sitio) */
+        /* ============================================ */
+        .footer-general {
+            margin-top: 50px;
+            padding: 20px 0 10px;
+            width: 100%;
+            max-width: 1300px;
+            text-align: center;
+            border-top: 2px solid rgba(74, 144, 217, 0.25);
+            color: #2C5F8A;
+            font-size: 0.9rem;
+        }
+
+        .footer-general strong {
+            color: #1A3A5C;
+        }
+
+        .footer-general .badge {
+            display: inline-block;
+            background: #4A90D9;
+            color: white;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 4px 4px;
+        }
+
+        .footer-general .badge.azul-oscuro {
+            background: #2C5F8A;
+        }
+
+        /* ============================================ */
+        /* MENSAJE DE CARGA */
+        /* ============================================ */
+        .loading-msg {
+            color: #2C5F8A;
+            font-size: 1.1rem;
+            padding: 40px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- GALERÍA DE 5 IMÁGENES                     -->
+    <!-- ========================================== -->
+    <div class="gallery" id="imageGallery">
+        <div class="loading-msg">
+            ⏳ Cargando imágenes...
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PIE DE PÁGINA GENERAL                      -->
+    <!-- ========================================== -->
+    <footer class="footer-general">
+        <p>
+            <strong>ELECTROCELL JM ES</strong> · Powered by José Martínez
+        </p>
+        <p>
+            <span class="badge">📱 +503 70555683</span>
+            <span class="badge azul-oscuro">✉️ electrocellim.es@gmail.com</span>
+        </p>
+        <p style="margin-top:10px; font-size:0.8rem; opacity:0.7;">
+            www.electrocelljm.es · Todos los derechos reservados
+        </p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT PARA CARGAR IMÁGENES              -->
+    <!-- ========================================== -->
+    <script>
+        // ============================================================
+        // 🔽 CAMBIA AQUÍ TUS 5 LINKS DE IMÁGENES (URLs reales)
+        // ============================================================
+        const imageUrls = [
+            "https://res.cloudinary.com/hfktpwsx/image/upload/v1785026696/Pol%C3%ADticas_generales_jyibsz.jpg",
+            "https://res.cloudinary.com/hfktpwsx/image/upload/v1785031036/Garant%C3%ADa_de_6_meses_kln0zl.jpg",
+            "https://res.cloudinary.com/hfktpwsx/image/upload/v1785031036/Verificaci%C3%B3n_y_respaldo_legal_para_reparaciones_de_dispositivos_uuf3cd.jpg",
+            "https://res.cloudinary.com/hfktpwsx/image/upload/v1785031041/Protocolo_para_inicio_de_reparaciones_y_refacciones_solicitadas_bajo_pedido_hevaas.jpg",
+            "https://res.cloudinary.com/hfktpwsx/image/upload/v1785031038/POL%C3%8DTICAS_DE_PRIVACIDAD_PROTECCI%C3%93N_DE_DATOS_Y_SEGURIDAD_T%C3%89CNICA_hikv8v.jpg"
+        ];
+
+        // ============================================================
+        // TEXTOS DE ENCABEZADO (personalizables)
+        // ============================================================
+        const headers = [
+            "📋 REGISTRO DE EQUIPOS",
+            "🔧 POLÍTICAS DE GARANTÍA",
+            "📱 DUI OBLIGATORIO",
+            "⚡ PROTOCOLO DE INICIO",
+            "🔒 POLÍTICA DE PRIVACIDAD"
+        ];
+
+        // ============================================================
+        // FECHAS POR DEFECTO (editables por el usuario)
+        // ============================================================
+        const fechasDefault = [
+            "06 de Enero 2025",
+            "01 de Septiembre 2025",
+            "01 de Diciembre 2025",
+            "01 de Junio 2026",
+            "01 de Junio 2026"
+        ];
+
+        // ============================================================
+        // NO MODIFICAR ESTA PARTE (genera automáticamente)
+        // ============================================================
+        const gallery = document.getElementById('imageGallery');
+        gallery.innerHTML = '';
+
+        // Crear cada elemento con encabezado + imagen + pie
+        imageUrls.forEach((url, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+
+            // ---- ENCABEZADO (texto NEGRO) ----
+            const header = document.createElement('div');
+            header.className = 'item-header';
+            header.innerHTML = `<span>${headers[index] || `Condición ${index + 1}`}</span>`;
+            item.appendChild(header);
+
+            // ---- CONTENEDOR DE LA IMAGEN ----
+            const wrapper = document.createElement('div');
+            wrapper.className = 'image-wrapper';
+
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = `Condición de Servicio ${index + 1}`;
+            img.loading = 'lazy';
+
+            // Si falla la carga, mostrar mensaje
+            img.onerror = function() {
+                this.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.style.padding = '60px 15px';
+                fallback.style.textAlign = 'center';
+                fallback.style.color = '#1A3A5C';
+                fallback.style.fontSize = '0.95rem';
+                fallback.style.background = 'rgba(255,255,255,0.5)';
+                fallback.style.borderRadius = '0';
+                fallback.style.width = '100%';
+                fallback.innerHTML = `
+                    <span style="font-size:2.5rem;">🖼️</span>
+                    <p style="margin-top:10px; font-weight:600;">Imagen ${index + 1} no disponible</p>
+                    <p style="font-size:0.75rem; color:#666; margin-top:4px;">Verifica el enlace</p>
+                `;
+                wrapper.appendChild(fallback);
+            };
+
+            wrapper.appendChild(img);
+            item.appendChild(wrapper);
+
+            // ---- PIE DE PÁGINA (texto BLANCO con fecha editable) ----
+            const footer = document.createElement('div');
+            footer.className = 'item-footer';
+
+            const label = document.createElement('span');
+            label.textContent = '📅 Fecha: ';
+            footer.appendChild(label);
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = fechasDefault[index] || '06/01/2025';
+            input.placeholder = 'DD/MM/AAAA';
+            input.title = 'Haz clic para editar la fecha';
+            footer.appendChild(input);
+
+            item.appendChild(footer);
+
+            // Agregar el item al gallery
+            gallery.appendChild(item);
+        });
+
+        console.log('✅ Galería cargada con bloques amarrados y esquinas completas.');
+    </script>
+
+</body>
+</html>
