@@ -32,6 +32,55 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            position: relative;
+        }
+
+        /* ============================================ */
+        /* SUPERPOSICIÓN PROTECTORA (dificulta capturas) */
+        /* ============================================ */
+        .protection-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            pointer-events: none;
+            /* No interfiere con clicks */;
+        }
+
+        /* Capa de "ruido" que interfiere con capturas */
+        .protection-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.01) 2px,
+                    rgba(255, 255, 255, 0.01) 4px);
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        /* Patrón de interferencia adicional */
+        .protection-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-radial-gradient(circle at 20% 30%,
+                    rgba(0, 0, 0, 0.01) 0px,
+                    rgba(0, 0, 0, 0.01) 3px,
+                    rgba(255, 255, 255, 0.01) 3px,
+                    rgba(255, 255, 255, 0.01) 6px);
+            mix-blend-mode: difference;
+            pointer-events: none;
         }
 
         /* ============================================ */
@@ -45,10 +94,13 @@
             justify-items: center;
             align-items: start;
             pointer-events: none;
+            position: relative;
+            z-index: 1;
         }
 
         .gallery-item {
             pointer-events: none;
+            position: relative;
         }
 
         .gallery-item img {
@@ -99,7 +151,7 @@
         }
 
         /* ============================================ */
-        /* CONTENEDOR DE LA IMAGEN (SIN BORDES) */
+        /* CONTENEDOR DE LA IMAGEN - CON CAPA PROTECTORA */
         /* ============================================ */
         .image-wrapper {
             width: 100%;
@@ -117,11 +169,12 @@
             -webkit-user-drag: none;
             user-drag: none;
             -webkit-touch-callout: none;
-            -webkit-touch-callout: none;
+            position: relative;
+            z-index: 1;
         }
 
         /* Capa protectora invisible sobre la imagen */
-        .image-wrapper::before {
+        .image-wrapper::after {
             content: '';
             position: absolute;
             top: 0;
@@ -130,7 +183,12 @@
             height: 100%;
             z-index: 10;
             pointer-events: none;
-            /* Bloquea cualquier interacción */;
+            background: repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(255, 255, 255, 0.005) 3px,
+                    rgba(255, 255, 255, 0.005) 6px);
+            mix-blend-mode: soft-light;
         }
 
         /* ============================================ */
@@ -160,9 +218,6 @@
             grid-template-columns: 1fr;
         }
 
-        /* ============================================ */
-        /* RESPONSIVE: TABLET (2-3 columnas) */
-        /* ============================================ */
         @media (min-width: 600px) {
             .gallery {
                 grid-template-columns: repeat(2, 1fr);
@@ -175,9 +230,6 @@
             }
         }
 
-        /* ============================================ */
-        /* RESPONSIVE: ESCRITORIO (4-5 columnas) */
-        /* ============================================ */
         @media (min-width: 1100px) {
             .gallery {
                 grid-template-columns: repeat(4, 1fr);
@@ -191,7 +243,7 @@
         }
 
         /* ============================================ */
-        /* PIE DE PÁGINA GENERAL (estilo del sitio) */
+        /* PIE DE PÁGINA GENERAL */
         /* ============================================ */
         .footer-general {
             margin-top: 50px;
@@ -203,6 +255,8 @@
             color: #2C5F8A;
             font-size: 0.9rem;
             pointer-events: none;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-general strong {
@@ -225,9 +279,6 @@
             background: #2C5F8A;
         }
 
-        /* ============================================ */
-        /* MENSAJE DE CARGA */
-        /* ============================================ */
         .loading-msg {
             color: #2C5F8A;
             font-size: 1.1rem;
@@ -237,7 +288,9 @@
             pointer-events: none;
         }
 
-        /* Advertencia de protección */
+        /* ============================================ */
+        /* AVISO DE PROTECCIÓN FLOTANTE */
+        /* ============================================ */
         .protection-notice {
             position: fixed;
             bottom: 10px;
@@ -247,14 +300,122 @@
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.65rem;
-            z-index: 9999;
+            z-index: 999999;
             pointer-events: none;
             backdrop-filter: blur(4px);
             opacity: 0.5;
         }
+
+        /* ============================================ */
+        /* ADVERTENCIA DE CAPTURA (popup visual) */
+        /* ============================================ */
+        .screenshot-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(200, 0, 0, 0.9);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            z-index: 9999999;
+            display: none;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .screenshot-warning.show {
+            display: block;
+            animation: warningPulse 0.3s ease;
+        }
+
+        @keyframes warningPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================ */
+        /* DETECTOR DE CAPTURAS (elemento invisible) */
+        /* ============================================ */
+        .screenshot-detector {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            z-index: -1;
+        }
+
+        /* ============================================ */
+        /* OVERLAY DE AGUA (marca de agua dinámica) */
+        /* ============================================ */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99998;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(26, 58, 92, 0.02) 100px,
+                    rgba(26, 58, 92, 0.02) 102px);
+            background-size: 200px 200px;
+        }
+
+        .watermark-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(26, 58, 92, 0.05);
+            pointer-events: none;
+            z-index: 99998;
+            white-space: nowrap;
+            letter-spacing: 10px;
+            user-select: none;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
+        }
     </style>
 </head>
 <body>
+
+    <!-- ========================================== -->
+    <!-- SUPERPOSICIÓN PROTECTORA (dificulta capturas) -->
+    <!-- ========================================== -->
+    <div class="protection-overlay"></div>
+
+    <!-- ========================================== -->
+    <!-- MARCA DE AGUA DINÁMICA -->
+    <!-- ========================================== -->
+    <div class="watermark-overlay"></div>
+    <div class="watermark-text">ELECTROCELL JM ES</div>
+
+    <!-- ========================================== -->
+    <!-- AVISO DE CAPTURA -->
+    <!-- ========================================== -->
+    <div class="screenshot-warning" id="screenshotWarning">
+        🚫 CAPTURA DE PANTALLA DETECTADA<br>
+        <span style="font-size:0.8rem; opacity:0.8;">Esta acción está prohibida</span>
+    </div>
 
     <!-- ========================================== -->
     <!-- GALERÍA DE 5 IMÁGENES                     -->
@@ -282,7 +443,12 @@
     </footer>
 
     <!-- Aviso de protección -->
-    <div class="protection-notice">🔒 Contenido Protegido</div>
+    <div class="protection-notice">🔒 Contenido protegido</div>
+
+    <!-- ========================================== -->
+    <!-- DETECTOR DE CAPTURAS (invisible) -->
+    <!-- ========================================== -->
+    <div class="screenshot-detector" id="screenshotDetector"></div>
 
     <!-- ========================================== -->
     <!-- SCRIPT DE PROTECCIÓN TOTAL                -->
@@ -304,7 +470,7 @@
             });
 
             // ============================================================
-            // 2. BLOQUEO DE SELECCIÓN DE TEXTO (en toda la página)
+            // 2. BLOQUEO DE SELECCIÓN DE TEXTO
             // ============================================================
             document.addEventListener('selectstart', function(e) {
                 e.preventDefault();
@@ -312,7 +478,7 @@
             });
 
             // ============================================================
-            // 3. BLOQUEO DE ARRASTRAR IMÁGENES (drag)
+            // 3. BLOQUEO DE ARRASTRAR IMÁGENES
             // ============================================================
             document.addEventListener('dragstart', function(e) {
                 if (e.target.tagName === 'IMG') {
@@ -322,7 +488,7 @@
             });
 
             // ============================================================
-            // 4. BLOQUEO DE DESCARGA DE IMÁGENES (click en imágenes)
+            // 4. BLOQUEO DE DESCARGA DE IMÁGENES
             // ============================================================
             document.addEventListener('click', function(e) {
                 if (e.target.tagName === 'IMG') {
@@ -332,7 +498,7 @@
             });
 
             // ============================================================
-            // 5. BLOQUEO DE TECLAS DE ATAJO (F12, Ctrl+Shift+I, etc.)
+            // 5. BLOQUEO DE TECLAS DE ATAJO
             // ============================================================
             document.addEventListener('keydown', function(e) {
                 // Bloquear F12
@@ -377,8 +543,15 @@
                     return false;
                 }
 
-                // Bloquear tecla de menú (contexto)
+                // Bloquear tecla de menú
                 if (e.key === 'ContextMenu') {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear PrintScreen (detección)
+                if (e.key === 'PrintScreen') {
+                    showScreenshotWarning();
                     e.preventDefault();
                     return false;
                 }
@@ -387,28 +560,7 @@
             });
 
             // ============================================================
-            // 6. BLOQUEO DE CAPTURAS DE PANTALLA (via PrintScreen)
-            // ============================================================
-            document.addEventListener('keyup', function(e) {
-                if (e.key === 'PrintScreen') {
-                    // Mostrar advertencia sutil
-                    const notice = document.querySelector('.protection-notice');
-                    if (notice) {
-                        notice.textContent = '🚫 Captura de pantalla bloqueada';
-                        notice.style.opacity = '1';
-                        notice.style.background = 'rgba(200, 0, 0, 0.8)';
-                        setTimeout(() => {
-                            notice.textContent = '🔒 Contenido protegido';
-                            notice.style.opacity = '0.5';
-                            notice.style.background = 'rgba(0, 0, 0, 0.7)';
-                        }, 2000);
-                    }
-                    return false;
-                }
-            });
-
-            // ============================================================
-            // 7. PROTECCIÓN CONTRA COPIADO (clipboard)
+            // 6. BLOQUEO DE COPIADO
             // ============================================================
             document.addEventListener('copy', function(e) {
                 e.preventDefault();
@@ -421,7 +573,7 @@
             });
 
             // ============================================================
-            // 8. BLOQUEO DE TOUCH (para móviles - presionar largo)
+            // 7. BLOQUEO DE TOUCH (móviles)
             // ============================================================
             document.addEventListener('touchstart', function(e) {
                 if (e.target.tagName === 'IMG') {
@@ -431,7 +583,6 @@
             }, { passive: false });
 
             document.addEventListener('touchmove', function(e) {
-                // Previene el zoom y el scroll forzado en imágenes
                 if (e.target.closest('.image-wrapper')) {
                     e.preventDefault();
                     return false;
@@ -439,7 +590,7 @@
             }, { passive: false });
 
             // ============================================================
-            // 9. DESHABILITAR GESTOS DE ZOOM EN DISPOSITIVOS MÓVILES
+            // 8. DESHABILITAR GESTOS DE ZOOM
             // ============================================================
             document.addEventListener('gesturestart', function(e) {
                 e.preventDefault();
@@ -457,7 +608,7 @@
             });
 
             // ============================================================
-            // 10. BLOQUEAR DOBLE CLICK (selección accidental)
+            // 9. BLOQUEAR DOBLE CLICK
             // ============================================================
             document.addEventListener('dblclick', function(e) {
                 if (e.target.tagName === 'IMG' || e.target.closest('.image-wrapper')) {
@@ -467,7 +618,7 @@
             });
 
             // ============================================================
-            // 11. EVITAR QUE LAS IMÁGENES SE GUARDEN POR ARRASTRE
+            // 10. EVITAR DROP
             // ============================================================
             document.addEventListener('drop', function(e) {
                 e.preventDefault();
@@ -480,22 +631,124 @@
             });
 
             // ============================================================
-            // 12. PROTECCIÓN ADICIONAL: Ocultar el menú contextual en imágenes
+            // 11. DETECCIÓN DE CAPTURAS DE PANTALLA
             // ============================================================
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('contextmenu', function(e) {
-                    e.preventDefault();
-                    return false;
+            let warningTimeout = null;
+
+            function showScreenshotWarning() {
+                const warning = document.getElementById('screenshotWarning');
+                if (!warning) return;
+
+                warning.classList.add('show');
+
+                if (warningTimeout) {
+                    clearTimeout(warningTimeout);
+                }
+
+                warningTimeout = setTimeout(() => {
+                    warning.classList.remove('show');
+                }, 3000);
+
+                // También vibrar si es posible
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+            }
+
+            // Detectar PrintScreen a través de blur/focus
+            let lastBlurTime = 0;
+
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    lastBlurTime = Date.now();
+                } else {
+                    // Si estuvo oculto por menos de 500ms, podría ser una captura
+                    if (Date.now() - lastBlurTime < 500 && lastBlurTime > 0) {
+                        showScreenshotWarning();
+                    }
+                    lastBlurTime = 0;
+                }
+            });
+
+            // ============================================================
+            // 12. DETECCIÓN DE CAPTURAS EN MÓVILES (eventos de fondo)
+            // ============================================================
+            document.addEventListener('pause', function() {
+                // App entra en background (posible captura en iOS)
+                lastBlurTime = Date.now();
+            });
+
+            document.addEventListener('resume', function() {
+                if (Date.now() - lastBlurTime < 1000 && lastBlurTime > 0) {
+                    showScreenshotWarning();
+                }
+                lastBlurTime = 0;
+            });
+
+            // ============================================================
+            // 13. PROTEGER CONTRA VISTA PREVIA DE IMPRESIÓN
+            // ============================================================
+            const style = document.createElement('style');
+            style.textContent = `
+                        @media print {
+                            body * { display: none !important; }
+                            body::before {
+                                content: "📄 No se permite imprimir este contenido";
+                                display: block !important;
+                                font-size: 2rem;
+                                padding: 50px;
+                                text-align: center;
+                                color: red;
+                                background: white;
+                            }
+                        }
+                    `;
+            document.head.appendChild(style);
+
+            // ============================================================
+            // 14. FORZAR QUE LAS IMÁGENES NO SEAN VISIBLES EN PRINT
+            // ============================================================
+            const imgStyle = document.createElement('style');
+            imgStyle.textContent = `
+                        @media print {
+                            img { display: none !important; }
+                            .image-wrapper { display: none !important; }
+                            .gallery-item { display: none !important; }
+                            .item-footer { display: none !important; }
+                            .item-header { display: none !important; }
+                        }
+                    `;
+            document.head.appendChild(imgStyle);
+
+            // ============================================================
+            // 15. DESHABILITAR DRAG DE IMÁGENES EN TODOS LOS NAVEGADORES
+            // ============================================================
+            document.querySelectorAll('img').forEach(img => {
+                img.draggable = false;
+                img.setAttribute('draggable', 'false');
+            });
+
+            // Observar cambios dinámicos
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.tagName === 'IMG') {
+                            node.draggable = false;
+                            node.setAttribute('draggable', 'false');
+                        }
+                    });
                 });
             });
 
+            observer.observe(document.body, { childList: true, subtree: true });
+
             console.log('🔒 Protección total activada: click derecho, selección, descarga, capturas y más.');
             console.log('📱 Compatible con iOS, Android, Windows, Linux y macOS.');
+            console.log('⚠️ Nota: Ningún método web puede bloquear completamente las capturas de pantalla.');
         })();
 
         // ============================================================
-        // CARGAR IMÁGENES (con protección)
+        // CARGAR IMÁGENES
         // ============================================================
         const imageUrls = [
             "https://res.cloudinary.com/hfktpwsx/image/upload/v1785026696/Pol%C3%ADticas_generales_jyibsz.jpg",
@@ -541,6 +794,7 @@
             img.alt = `Condición de Servicio ${index + 1}`;
             img.loading = 'lazy';
             img.draggable = false;
+            img.setAttribute('draggable', 'false');
 
             img.onerror = function() {
                 this.style.display = 'none';
