@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ELECTROCELL JM ES - Condiciones de Servicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ELECTROCELL JM ES - Protección Total</title>
     <style>
         /* ============================================ */
         /* RESET Y ESTILOS BASE */
@@ -12,6 +12,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -22,6 +28,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* ============================================ */
@@ -34,6 +44,18 @@
             max-width: 1300px;
             justify-items: center;
             align-items: start;
+            pointer-events: none;
+        }
+
+        .gallery-item {
+            pointer-events: none;
+        }
+
+        .gallery-item img {
+            pointer-events: none;
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-touch-callout: none;
         }
 
         /* ============================================ */
@@ -46,6 +68,7 @@
             align-items: stretch;
             background: transparent;
             container-type: inline-size;
+            position: relative;
         }
 
         /* ============================================ */
@@ -62,6 +85,7 @@
             border-bottom: 2px solid rgba(74, 144, 217, 0.3);
             margin-bottom: 5px;
             flex-shrink: 0;
+            pointer-events: none;
         }
 
         .item-header span {
@@ -71,6 +95,7 @@
             display: inline-block;
             white-space: nowrap;
             font-size: clamp(0.55rem, 2.2vw, 1.1rem);
+            pointer-events: none;
         }
 
         /* ============================================ */
@@ -79,6 +104,8 @@
         .image-wrapper {
             width: 100%;
             flex-shrink: 0;
+            position: relative;
+            pointer-events: none;
         }
 
         .gallery-item img {
@@ -86,6 +113,24 @@
             width: 100%;
             height: auto;
             box-shadow: none;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-touch-callout: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* Capa protectora invisible sobre la imagen */
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            /* Bloquea cualquier interacción */;
         }
 
         /* ============================================ */
@@ -102,10 +147,10 @@
             margin-top: 5px;
             backdrop-filter: blur(2px);
             flex-shrink: 0;
-            /* TEXTO PLANO, SIN INPUT, SIN BORDES */
             font-size: clamp(0.55rem, 1.8vw, 0.85rem);
             white-space: nowrap;
             overflow: visible;
+            pointer-events: none;
         }
 
         /* ============================================ */
@@ -157,6 +202,7 @@
             border-top: 2px solid rgba(74, 144, 217, 0.25);
             color: #2C5F8A;
             font-size: 0.9rem;
+            pointer-events: none;
         }
 
         .footer-general strong {
@@ -172,6 +218,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             margin: 4px 4px;
+            pointer-events: none;
         }
 
         .footer-general .badge.azul-oscuro {
@@ -187,6 +234,23 @@
             padding: 40px;
             text-align: center;
             grid-column: 1 / -1;
+            pointer-events: none;
+        }
+
+        /* Advertencia de protección */
+        .protection-notice {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            z-index: 9999;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -217,12 +281,221 @@
         </p>
     </footer>
 
+    <!-- Aviso de protección -->
+    <div class="protection-notice">🔒 Contenido Protegido</div>
+
     <!-- ========================================== -->
-    <!-- SCRIPT PARA CARGAR IMÁGENES              -->
+    <!-- SCRIPT DE PROTECCIÓN TOTAL                -->
     <!-- ========================================== -->
     <script>
         // ============================================================
-        // 🔽 CAMBIA AQUÍ TUS 5 LINKS DE IMÁGENES (URLs reales)
+        // 🔒 PROTECCIÓN AVANZADA CONTRA FILTRACIONES
+        // ============================================================
+
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. BLOQUEO DE CLICK DERECHO (context menu)
+            // ============================================================
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ============================================================
+            // 2. BLOQUEO DE SELECCIÓN DE TEXTO (en toda la página)
+            // ============================================================
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ============================================================
+            // 3. BLOQUEO DE ARRASTRAR IMÁGENES (drag)
+            // ============================================================
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // ============================================================
+            // 4. BLOQUEO DE DESCARGA DE IMÁGENES (click en imágenes)
+            // ============================================================
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // ============================================================
+            // 5. BLOQUEO DE TECLAS DE ATAJO (F12, Ctrl+Shift+I, etc.)
+            // ============================================================
+            document.addEventListener('keydown', function(e) {
+                // Bloquear F12
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+Shift+I (inspeccionar)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+Shift+J (consola)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+U (ver código fuente)
+                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+S (guardar página)
+                if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+P (imprimir)
+                if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear Ctrl+Shift+C (inspeccionar elemento)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Bloquear tecla de menú (contexto)
+                if (e.key === 'ContextMenu') {
+                    e.preventDefault();
+                    return false;
+                }
+
+                return true;
+            });
+
+            // ============================================================
+            // 6. BLOQUEO DE CAPTURAS DE PANTALLA (via PrintScreen)
+            // ============================================================
+            document.addEventListener('keyup', function(e) {
+                if (e.key === 'PrintScreen') {
+                    // Mostrar advertencia sutil
+                    const notice = document.querySelector('.protection-notice');
+                    if (notice) {
+                        notice.textContent = '🚫 Captura de pantalla bloqueada';
+                        notice.style.opacity = '1';
+                        notice.style.background = 'rgba(200, 0, 0, 0.8)';
+                        setTimeout(() => {
+                            notice.textContent = '🔒 Contenido protegido';
+                            notice.style.opacity = '0.5';
+                            notice.style.background = 'rgba(0, 0, 0, 0.7)';
+                        }, 2000);
+                    }
+                    return false;
+                }
+            });
+
+            // ============================================================
+            // 7. PROTECCIÓN CONTRA COPIADO (clipboard)
+            // ============================================================
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ============================================================
+            // 8. BLOQUEO DE TOUCH (para móviles - presionar largo)
+            // ============================================================
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', function(e) {
+                // Previene el zoom y el scroll forzado en imágenes
+                if (e.target.closest('.image-wrapper')) {
+                    e.preventDefault();
+                    return false;
+                }
+            }, { passive: false });
+
+            // ============================================================
+            // 9. DESHABILITAR GESTOS DE ZOOM EN DISPOSITIVOS MÓVILES
+            // ============================================================
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('gesturechange', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('gestureend', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ============================================================
+            // 10. BLOQUEAR DOBLE CLICK (selección accidental)
+            // ============================================================
+            document.addEventListener('dblclick', function(e) {
+                if (e.target.tagName === 'IMG' || e.target.closest('.image-wrapper')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // ============================================================
+            // 11. EVITAR QUE LAS IMÁGENES SE GUARDEN POR ARRASTRE
+            // ============================================================
+            document.addEventListener('drop', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ============================================================
+            // 12. PROTECCIÓN ADICIONAL: Ocultar el menú contextual en imágenes
+            // ============================================================
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+            });
+
+            console.log('🔒 Protección total activada: click derecho, selección, descarga, capturas y más.');
+            console.log('📱 Compatible con iOS, Android, Windows, Linux y macOS.');
+        })();
+
+        // ============================================================
+        // CARGAR IMÁGENES (con protección)
         // ============================================================
         const imageUrls = [
             "https://res.cloudinary.com/hfktpwsx/image/upload/v1785026696/Pol%C3%ADticas_generales_jyibsz.jpg",
@@ -232,9 +505,6 @@
             "https://res.cloudinary.com/hfktpwsx/image/upload/v1785031038/POL%C3%8DTICAS_DE_PRIVACIDAD_PROTECCI%C3%93N_DE_DATOS_Y_SEGURIDAD_T%C3%89CNICA_hikv8v.jpg"
         ];
 
-        // ============================================================
-        // TEXTOS DE ENCABEZADO (personalizables)
-        // ============================================================
         const headers = [
             "📋 REGISTRO DE EQUIPOS",
             "🔧 POLÍTICAS DE GARANTÍA",
@@ -243,9 +513,6 @@
             "🔒 POLÍTICA DE PRIVACIDAD"
         ];
 
-        // ============================================================
-        // FECHAS (texto plano, sin input, sin encajonar)
-        // ============================================================
         const fechas = [
             "06 de Enero 2025",
             "01 de Septiembre 2025",
@@ -254,24 +521,18 @@
             "01 de Junio 2026"
         ];
 
-        // ============================================================
-        // NO MODIFICAR ESTA PARTE (genera automáticamente)
-        // ============================================================
         const gallery = document.getElementById('imageGallery');
         gallery.innerHTML = '';
 
-        // Crear cada elemento con encabezado + imagen + pie
         imageUrls.forEach((url, index) => {
             const item = document.createElement('div');
             item.className = 'gallery-item';
 
-            // ---- ENCABEZADO (texto NEGRO) ----
             const header = document.createElement('div');
             header.className = 'item-header';
-            header.innerHTML = `<span>${headers[index] || `Condición ${index + 1}`}</span>`;
+            header.innerHTML = `<span>${headers[index]}</span>`;
             item.appendChild(header);
 
-            // ---- CONTENEDOR DE LA IMAGEN ----
             const wrapper = document.createElement('div');
             wrapper.className = 'image-wrapper';
 
@@ -279,8 +540,8 @@
             img.src = url;
             img.alt = `Condición de Servicio ${index + 1}`;
             img.loading = 'lazy';
+            img.draggable = false;
 
-            // Si falla la carga, mostrar mensaje
             img.onerror = function() {
                 this.style.display = 'none';
                 const fallback = document.createElement('div');
@@ -289,32 +550,27 @@
                 fallback.style.color = '#1A3A5C';
                 fallback.style.fontSize = '0.95rem';
                 fallback.style.background = 'rgba(255,255,255,0.5)';
-                fallback.style.borderRadius = '0';
                 fallback.style.width = '100%';
                 fallback.innerHTML = `
-                    <span style="font-size:2.5rem;">🖼️</span>
-                    <p style="margin-top:10px; font-weight:600;">Imagen ${index + 1} no disponible</p>
-                    <p style="font-size:0.75rem; color:#666; margin-top:4px;">Verifica el enlace</p>
-                `;
+                            <span style="font-size:2.5rem;">🖼️</span>
+                            <p style="margin-top:10px; font-weight:600;">Imagen ${index + 1} no disponible</p>
+                            <p style="font-size:0.75rem; color:#666; margin-top:4px;">Verifica el enlace</p>
+                        `;
                 wrapper.appendChild(fallback);
             };
 
             wrapper.appendChild(img);
             item.appendChild(wrapper);
 
-            // ---- PIE DE PÁGINA (SOLO TEXTO PLANO, SIN INPUT, SIN BORDES) ----
             const footer = document.createElement('div');
             footer.className = 'item-footer';
-            // Texto plano, sin input, sin bordes, sin encajonar
-            footer.textContent = fechas[index] || '06/01/2025';
-
+            footer.textContent = fechas[index];
             item.appendChild(footer);
 
-            // Agregar el item al gallery
             gallery.appendChild(item);
         });
 
-        console.log('✅ Galería cargada con fechas en texto plano (sin encajonar).');
+        console.log('✅ Galería cargada con protección total.');
     </script>
 
 </body>
