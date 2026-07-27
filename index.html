@@ -70,7 +70,6 @@
             border-radius: 20px;
             display: inline-block;
             white-space: nowrap;
-            /* Tamaño fluido que se reduce en pantallas pequeñas */
             font-size: clamp(0.55rem, 2.2vw, 1.1rem);
         }
 
@@ -95,7 +94,7 @@
         .item-footer {
             width: 100%;
             text-align: center;
-            padding: 8px 5px 10px 5px;
+            padding: 10px 5px 10px 5px;
             color: #FFFFFF;
             font-weight: 500;
             background: rgba(26, 58, 92, 0.7);
@@ -103,29 +102,10 @@
             margin-top: 5px;
             backdrop-filter: blur(2px);
             flex-shrink: 0;
-        }
-
-        .item-footer input {
-            background: transparent;
-            border: none;
-            border-bottom: 1.5px dashed rgba(255, 255, 255, 0.6);
-            color: #FFFFFF;
-            font-weight: 500;
-            text-align: center;
-            padding: 2px 8px;
-            outline: none;
-            font-family: inherit;
-            /* Tamaño fluido que se reduce en pantallas pequeñas */
+            /* TEXTO PLANO, SIN INPUT, SIN BORDES */
             font-size: clamp(0.55rem, 1.8vw, 0.85rem);
-            width: clamp(80px, 20vw, 160px);
-        }
-
-        .item-footer input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .item-footer input:focus {
-            border-bottom-color: #FFFFFF;
+            white-space: nowrap;
+            overflow: visible;
         }
 
         /* ============================================ */
@@ -264,9 +244,9 @@
         ];
 
         // ============================================================
-        // FECHAS POR DEFECTO (editables por el usuario)
+        // FECHAS (texto plano, sin input, sin encajonar)
         // ============================================================
-        const fechasDefault = [
+        const fechas = [
             "06 de Enero 2025",
             "01 de Septiembre 2025",
             "01 de Diciembre 2025",
@@ -322,17 +302,11 @@
             wrapper.appendChild(img);
             item.appendChild(wrapper);
 
-            // ---- PIE DE PÁGINA (SOLO LA FECHA, SIN "Fecha:") ----
+            // ---- PIE DE PÁGINA (SOLO TEXTO PLANO, SIN INPUT, SIN BORDES) ----
             const footer = document.createElement('div');
             footer.className = 'item-footer';
-
-            // Solo el input de fecha, sin la etiqueta "Fecha:"
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = fechasDefault[index] || '06/01/2025';
-            input.placeholder = 'DD/MM/AAAA';
-            input.title = 'Haz clic para editar la fecha';
-            footer.appendChild(input);
+            // Texto plano, sin input, sin bordes, sin encajonar
+            footer.textContent = fechas[index] || '06/01/2025';
 
             item.appendChild(footer);
 
@@ -340,7 +314,7 @@
             gallery.appendChild(item);
         });
 
-        console.log('✅ Galería cargada con bloques amarrados y esquinas completas.');
+        console.log('✅ Galería cargada con fechas en texto plano (sin encajonar).');
     </script>
 
 </body>
