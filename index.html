@@ -117,7 +117,6 @@
             -webkit-user-drag: none;
             user-drag: none;
             -webkit-touch-callout: none;
-            -webkit-touch-callout: none;
         }
 
         /* Capa protectora invisible sobre la imagen */
@@ -130,7 +129,6 @@
             height: 100%;
             z-index: 10;
             pointer-events: none;
-            /* Bloquea cualquier interacción */;
         }
 
         /* ============================================ */
@@ -151,6 +149,63 @@
             white-space: nowrap;
             overflow: visible;
             pointer-events: none;
+        }
+
+        /* ============================================ */
+        /* BARRA DE REDES SOCIALES (ABAJO DE IMÁGENES)   */
+        /* ============================================ */
+        .social-bar-container {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 0 10px 0;
+            margin-top: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            pointer-events: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Desfase de animación flotante */
+        .social-btn:nth-child(1) { animation-delay: 0s; }
+        .social-btn:nth-child(2) { animation-delay: 0.2s; }
+        .social-btn:nth-child(3) { animation-delay: 0.4s; }
+        .social-btn:nth-child(4) { animation-delay: 0.6s; }
+        .social-btn:nth-child(5) { animation-delay: 0.8s; }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.12);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .social-btn svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
         }
 
         /* ============================================ */
@@ -194,7 +249,7 @@
         /* PIE DE PÁGINA GENERAL (estilo del sitio) */
         /* ============================================ */
         .footer-general {
-            margin-top: 50px;
+            margin-top: 20px;
             padding: 20px 0 10px;
             width: 100%;
             max-width: 1300px;
@@ -288,6 +343,67 @@
     </div>
 
     <!-- ========================================== -->
+    <!-- BARRA DE REDES SOCIALES (ABAJO)           -->
+    <!-- ========================================== -->
+    <div class="social-bar-container">
+        <div class="social-buttons">
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
+                <svg viewBox="0 0 100 100">
+                    <defs>
+                        <radialGradient id="igGrad" cx="30%" cy="107%" r="130%">
+                            <stop offset="0%" stop-color="#fdf497" />
+                            <stop offset="5%" stop-color="#fdf497" />
+                            <stop offset="45%" stop-color="#fd5949" />
+                            <stop offset="60%" stop-color="#d6249f" />
+                            <stop offset="100%" stop-color="#285AEB" />
+                        </radialGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="50" fill="url(#igGrad)" />
+                    <rect x="23" y="23" width="54" height="54" rx="15" fill="none" stroke="#ffffff" stroke-width="7" />
+                    <circle cx="50" cy="50" r="13" fill="none" stroke="#ffffff" stroke-width="7" />
+                    <circle cx="65" cy="35" r="4.5" fill="#ffffff" />
+                </svg>
+            </a>
+
+            <!-- WhatsApp Business -->
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-btn" title="WhatsApp Business">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="50" fill="#25D366" />
+                    <path d="M50 18 C32.3 18 18 32.3 18 50 C18 56 19.6 61.6 22.5 66.4 L19 79 L32.1 75.5 C36.7 78.1 42 79.5 47.5 79.5 C65.2 79.5 79.5 65.2 79.5 47.5 C79.5 29.8 65.2 18 50 18 Z" fill="#25D366" stroke="#ffffff" stroke-width="3.5" />
+                    <circle cx="50" cy="48" r="25" fill="#25D366" />
+                    <text x="50" y="58" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="28" fill="#ffffff" text-anchor="middle">B</text>
+                </svg>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="50" fill="#1877F2" />
+                    <path d="M57 33 h8 V20 h-10 c-11 0 -15 7 -15 16 v8 h-8 v13 h8 v28 h14 V57 h10 l2 -13 h-12 v-6 c0 -3 2 -5 5 -5 z" fill="#ffffff" />
+                </svg>
+            </a>
+
+            <!-- TikTok (Logo Vectorial Corregido) -->
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="TikTok">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="50" fill="#000000" />
+                    <path d="M68 41.5 A20.5 20.5 0 0 1 56 37.5 V61 A18 18 0 1 1 38 43 A18 18 0 0 1 42 43.5 V52.8 A9.2 9.2 0 1 0 46.8 61 V22 H56 A20.5 20.5 0 0 0 68 32.5 Z" fill="#ffffff" />
+                </svg>
+            </a>
+
+            <!-- YouTube (Logo Vectorial Corregido) -->
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="50" fill="#FF0000" />
+                    <rect x="23" y="32" width="54" height="36" rx="12" fill="#FFFFFF" />
+                    <polygon points="45,41 61,50 45,59" fill="#FF0000" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
     <!-- PIE DE PÁGINA GENERAL                      -->
     <!-- ========================================== -->
     <footer class="footer-general">
@@ -310,25 +426,19 @@
         (function() {
             'use strict';
 
-            // ============================================================
-            // 1. BLOQUEO DE CLICK DERECHO (context menu)
-            // ============================================================
+            // 1. BLOQUEO DE CLICK DERECHO
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
                 return false;
             });
 
-            // ============================================================
-            // 2. BLOQUEO DE SELECCIÓN DE TEXTO (en toda la página)
-            // ============================================================
+            // 2. BLOQUEO DE SELECCIÓN DE TEXTO
             document.addEventListener('selectstart', function(e) {
                 e.preventDefault();
                 return false;
             });
 
-            // ============================================================
-            // 3. BLOQUEO DE ARRASTRAR IMÁGENES (drag)
-            // ============================================================
+            // 3. BLOQUEO DE ARRASTRAR IMÁGENES
             document.addEventListener('dragstart', function(e) {
                 if (e.target.tagName === 'IMG') {
                     e.preventDefault();
@@ -336,9 +446,7 @@
                 }
             });
 
-            // ============================================================
-            // 4. BLOQUEO DE DESCARGA DE IMÁGENES (click en imágenes)
-            // ============================================================
+            // 4. BLOQUEO DE DESCARGA DE IMÁGENES
             document.addEventListener('click', function(e) {
                 if (e.target.tagName === 'IMG') {
                     e.preventDefault();
@@ -346,67 +454,22 @@
                 }
             });
 
-            // ============================================================
-            // 5. BLOQUEO DE TECLAS DE ATAJO (F12, Ctrl+Shift+I, etc.)
-            // ============================================================
+            // 5. BLOQUEO DE TECLAS DE ATAJO
             document.addEventListener('keydown', function(e) {
-                // Bloquear F12
-                if (e.key === 'F12') {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+Shift+I (inspeccionar)
-                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+Shift+J (consola)
-                if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+U (ver código fuente)
-                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+S (guardar página)
-                if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+P (imprimir)
-                if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear Ctrl+Shift+C (inspeccionar elemento)
-                if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                // Bloquear tecla de menú (contexto)
-                if (e.key === 'ContextMenu') {
-                    e.preventDefault();
-                    return false;
-                }
-
+                if (e.key === 'F12') { e.preventDefault(); return false; }
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
+                if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
+                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
+                if (e.ctrlKey && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
+                if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) { e.preventDefault(); return false; }
+                if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
+                if (e.key === 'ContextMenu') { e.preventDefault(); return false; }
                 return true;
             });
 
-            // ============================================================
-            // 6. BLOQUEO DE CAPTURAS DE PANTALLA (via PrintScreen)
-            // ============================================================
+            // 6. BLOQUEO DE CAPTURAS DE PANTALLA
             document.addEventListener('keyup', function(e) {
                 if (e.key === 'PrintScreen') {
-                    // Mostrar advertencia sutil
                     const notice = document.querySelector('.protection-notice');
                     if (notice) {
                         notice.textContent = '🚫 Captura de pantalla bloqueada';
@@ -422,58 +485,25 @@
                 }
             });
 
-            // ============================================================
-            // 7. PROTECCIÓN CONTRA COPIADO (clipboard)
-            // ============================================================
-            document.addEventListener('copy', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            // 7. PROTECCIÓN CONTRA COPIADO
+            document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
+            document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
 
-            document.addEventListener('cut', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            // ============================================================
-            // 8. BLOQUEO DE TOUCH (para móviles - presionar largo)
-            // ============================================================
+            // 8. BLOQUEO DE TOUCH EN IMÁGENES
             document.addEventListener('touchstart', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                    return false;
-                }
+                if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
             }, { passive: false });
 
             document.addEventListener('touchmove', function(e) {
-                // Previene el zoom y el scroll forzado en imágenes
-                if (e.target.closest('.image-wrapper')) {
-                    e.preventDefault();
-                    return false;
-                }
+                if (e.target.closest('.image-wrapper')) { e.preventDefault(); return false; }
             }, { passive: false });
 
-            // ============================================================
-            // 9. DESHABILITAR GESTOS DE ZOOM EN DISPOSITIVOS MÓVILES
-            // ============================================================
-            document.addEventListener('gesturestart', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            // 9. DESHABILITAR GESTOS DE ZOOM
+            document.addEventListener('gesturestart', function(e) { e.preventDefault(); return false; });
+            document.addEventListener('gesturechange', function(e) { e.preventDefault(); return false; });
+            document.addEventListener('gestureend', function(e) { e.preventDefault(); return false; });
 
-            document.addEventListener('gesturechange', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            document.addEventListener('gestureend', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            // ============================================================
-            // 10. BLOQUEAR DOBLE CLICK (selección accidental)
-            // ============================================================
+            // 10. BLOQUEAR DOBLE CLICK
             document.addEventListener('dblclick', function(e) {
                 if (e.target.tagName === 'IMG' || e.target.closest('.image-wrapper')) {
                     e.preventDefault();
@@ -481,22 +511,11 @@
                 }
             });
 
-            // ============================================================
-            // 11. EVITAR QUE LAS IMÁGENES SE GUARDEN POR ARRASTRE
-            // ============================================================
-            document.addEventListener('drop', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            // 11. EVITAR GUARDADO POR ARRASTRE
+            document.addEventListener('drop', function(e) { e.preventDefault(); return false; });
+            document.addEventListener('dragover', function(e) { e.preventDefault(); return false; });
 
-            document.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            // ============================================================
-            // 12. PROTECCIÓN ADICIONAL: Ocultar el menú contextual en imágenes
-            // ============================================================
+            // 12. DESHABILITAR MENÚ CONTEXTUAL EN IMÁGENES
             const images = document.querySelectorAll('img');
             images.forEach(img => {
                 img.addEventListener('contextmenu', function(e) {
@@ -504,13 +523,10 @@
                     return false;
                 });
             });
-
-            console.log('🔒 Protección total activada: click derecho, selección, descarga, capturas y más.');
-            console.log('📱 Compatible con iOS, Android, Windows, Linux y macOS.');
         })();
 
         // ============================================================
-        // CARGAR IMÁGENES (con protección)
+        // CARGAR IMÁGENES DE GALERÍA
         // ============================================================
         const imageUrls = [
             "https://res.cloudinary.com/hfktpwsx/image/upload/v1785026696/Pol%C3%ADticas_generales_jyibsz.jpg",
