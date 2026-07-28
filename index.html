@@ -35,6 +35,66 @@
         }
 
         /* ============================================ */
+        /* ENCABEZADO PREMIUM VIP                       */
+        /* ============================================ */
+        .vip-header {
+            width: 100%;
+            max-width: 1300px;
+            background: linear-gradient(135deg, #1A3A5C 0%, #2C5F8A 50%, #10253E 100%);
+            color: #FFFFFF;
+            padding: 20px 15px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(26, 58, 92, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .vip-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .vip-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            color: #000000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+        }
+
+        .vip-header h1 {
+            font-size: clamp(1.2rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .vip-header p {
+            font-size: clamp(0.75rem, 1.8vw, 1rem);
+            color: #D6EEFF;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================ */
         /* CONTENEDOR DE IMÁGENES */
         /* ============================================ */
         .gallery {
@@ -334,6 +394,15 @@
 <body>
 
     <!-- ========================================== -->
+    <!-- ENCABEZADO PREMIUM VIP                     -->
+    <!-- ========================================== -->
+    <header class="vip-header">
+        <span class="vip-badge">★ 𝒟𝒾𝑜𝓈 𝑀𝒾 𝑀𝑒𝒿𝑜𝓇 𝐼𝓃𝓈𝓉𝓇𝓊𝒸𝓉𝑜𝓇 ★</span>
+        <h1>𝐄𝐥𝐞𝐜𝐭𝐫𝐨𝐂𝐞𝐥𝐥 𝐉𝐌 𝐄𝐥 𝐒𝐚𝐥𝐯𝐚𝐝𝐨𝐫</h1>
+        <p>Términos y Condiciones de Servicio</p>
+    </header>
+
+    <!-- ========================================== -->
     <!-- GALERÍA DE 5 IMÁGENES                      -->
     <!-- ========================================== -->
     <div class="gallery" id="imageGallery">
@@ -343,12 +412,12 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- BARRA DE REDES SOCIALES (ABAJO)           -->
+    <!-- BARRA DE REDES SOCIALES (ABAJO)            -->
     <!-- ========================================== -->
     <div class="social-bar-container">
         <div class="social-buttons">
             <!-- Instagram -->
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
+            <a href="https://www.instagram.com/electrocelljm.es?igsh=MWk2Mm50dmtxeXpnMQ==" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
                 <svg viewBox="0 0 100 100">
                     <defs>
                         <radialGradient id="igGrad" cx="30%" cy="107%" r="130%">
@@ -367,7 +436,7 @@
             </a>
 
             <!-- WhatsApp Business -->
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-btn" title="WhatsApp Business">
+            <a href="https://wa.me/message/YFZSZUJUEOUZA1" target="_blank" rel="noopener noreferrer" class="social-btn" title="WhatsApp Business">
                 <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="50" fill="#25D366" />
                     <path d="M50 18 C32.3 18 18 32.3 18 50 C18 56 19.6 61.6 22.5 66.4 L19 79 L32.1 75.5 C36.7 78.1 42 79.5 47.5 79.5 C65.2 79.5 79.5 65.2 79.5 47.5 C79.5 29.8 65.2 18 50 18 Z" fill="#25D366" stroke="#ffffff" stroke-width="3.5" />
@@ -377,7 +446,7 @@
             </a>
 
             <!-- Facebook -->
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook">
+            <a href="https://www.facebook.com/share/1F4n2c2w58/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook">
                 <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="50" fill="#1877F2" />
                     <path d="M57 33 h8 V20 h-10 c-11 0 -15 7 -15 16 v8 h-8 v13 h8 v28 h14 V57 h10 l2 -13 h-12 v-6 c0 -3 2 -5 5 -5 z" fill="#ffffff" />
@@ -385,7 +454,7 @@
             </a>
 
             <!-- TikTok (Logo Vectorial Corregido) -->
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="TikTok">
+            <a href="https://www.tiktok.com/@electrocelljm.es?_r=1&_t=ZS-91YkyBotZMg" target="_blank" rel="noopener noreferrer" class="social-btn" title="TikTok">
                 <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="50" fill="#000000" />
                     <path d="M68 41.5 A20.5 20.5 0 0 1 56 37.5 V61 A18 18 0 1 1 38 43 A18 18 0 0 1 42 43.5 V52.8 A9.2 9.2 0 1 0 46.8 61 V22 H56 A20.5 20.5 0 0 0 68 32.5 Z" fill="#ffffff" />
@@ -393,7 +462,7 @@
             </a>
 
             <!-- YouTube (Logo Vectorial Corregido) -->
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube">
+            <a href="https://youtube.com/@electrocelljm-es?si=WLnFJiTCPxZ2Dstt" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube">
                 <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="50" fill="#FF0000" />
                     <rect x="23" y="32" width="54" height="36" rx="12" fill="#FFFFFF" />
@@ -511,7 +580,7 @@
                 }
             });
 
-            // 11. EVITAR GUARDADO POR ARRASTRE
+            // 11. EVITAR GUARDADO POR ARRASTRAR
             document.addEventListener('drop', function(e) { e.preventDefault(); return false; });
             document.addEventListener('dragover', function(e) { e.preventDefault(); return false; });
 
