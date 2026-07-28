@@ -59,7 +59,7 @@
         }
 
         /* ============================================ */
-        /* CADA BLOQUE: IMAGEN + ENCABEZADO + PIE      */
+        /* CADA BLOQUE: IMAGEN + ENCABEZADO + PIE       */
         /* ============================================ */
         .gallery-item {
             width: 100%;
@@ -202,11 +202,33 @@
             border-top: 2px solid rgba(74, 144, 217, 0.25);
             color: #2C5F8A;
             font-size: 0.9rem;
-            pointer-events: none;
         }
 
-        .footer-general strong {
+        .footer-general p {
+            margin: 0;
+            padding: 4px 0;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
             color: #1A3A5C;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-general p:nth-child(1) {
+            font-weight: 700;
+            font-size: clamp(0.75rem, 1.8vw, 1.1rem);
+        }
+
+        .footer-general p:nth-child(2) {
+            font-weight: 500;
+            font-size: clamp(0.65rem, 1.6vw, 0.95rem);
+        }
+
+        .footer-general p a {
+            color: #1A3A5C;
+            text-decoration: underline;
+            font-weight: 700;
+            font-size: clamp(0.65rem, 1.6vw, 0.95rem);
+            pointer-events: auto;
         }
 
         .footer-general .badge {
@@ -257,7 +279,7 @@
 <body>
 
     <!-- ========================================== -->
-    <!-- GALERÍA DE 5 IMÁGENES                     -->
+    <!-- GALERÍA DE 5 IMÁGENES                      -->
     <!-- ========================================== -->
     <div class="gallery" id="imageGallery">
         <div class="loading-msg">
@@ -269,23 +291,16 @@
     <!-- PIE DE PÁGINA GENERAL                      -->
     <!-- ========================================== -->
     <footer class="footer-general">
-        <p>
-            <strong>ELECTROCELL JM ES</strong> · Powered by José Martínez
-        </p>
-        <p>
-            <span class="badge">📱 +503 70555683</span>
-            <span class="badge azul-oscuro">✉️ electrocellim.es@gmail.com</span>
-        </p>
-        <p style="margin-top:10px; font-size:0.8rem; opacity:0.7;">
-            www.electrocelljm.es · Todos los derechos reservados
-        </p>
+        <p>Copyright © Powered By ElectroCell JM ES 2025</p>
+        <p>TODOS LOS DERECHOS RESERVADOS</p>
+        <p><a href="#">AVISO LEGAL</a></p>
     </footer>
 
     <!-- Aviso de protección -->
     <div class="protection-notice">🔒 Contenido Protegido</div>
 
     <!-- ========================================== -->
-    <!-- SCRIPT DE PROTECCIÓN TOTAL                -->
+    <!-- SCRIPT DE PROTECCIÓN TOTAL                 -->
     <!-- ========================================== -->
     <script>
         // ============================================================
