@@ -65,13 +65,13 @@
             gap: 6px;
             background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             color: #0d1b2a;
-            font-size: clamp(0.95rem, 3.8vw, 1.3rem); /* Tamaño ajustado para visibilidad de cursiva */
+            font-size: clamp(0.95rem, 3.8vw, 1.3rem);
             font-weight: 700;
-            font-family: 'Dancing Script', 'Brush Script MT', cursive; /* FUENTE CURSIVA ENLAZADA APLICADA */
-            text-transform: none; /* Desactivado para permitir el enlace correcto letra con letra */
+            font-family: 'Dancing Script', 'Brush Script MT', cursive;
+            text-transform: none;
             padding: 5px 18px;
             border-radius: 50px;
-            letter-spacing: 0px; /* Las letras necesitan 0px para enlazarse adecuadamente */
+            letter-spacing: 0px;
             margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 215, 0, 0.4);
             border: 1px solid #FFFFFF;
@@ -406,6 +406,110 @@
             backdrop-filter: blur(4px);
             opacity: 0.5;
         }
+
+        /* ============================================ */
+        /* ESTILOS PARA EL AVISO LEGAL EN PANTALLA COMPLETA */
+        /* ============================================ */
+        .legal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: none;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            color: #1A3A5C;
+        }
+
+        .legal-overlay.active {
+            display: block;
+        }
+
+        .legal-overlay .legal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .legal-overlay .legal-content h1 {
+            font-size: 2.2rem;
+            color: #0d1b2a;
+            border-bottom: 3px solid #4A90D9;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .legal-overlay .legal-content h2 {
+            font-size: 1.4rem;
+            color: #0d1b2a;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .legal-overlay .legal-content p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        .legal-overlay .legal-content ul {
+            padding-left: 25px;
+            margin-bottom: 16px;
+        }
+
+        .legal-overlay .legal-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .legal-overlay .legal-content .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .legal-overlay .close-legal-btn {
+            display: block;
+            margin: 30px auto 10px;
+            padding: 12px 40px;
+            background: #4A90D9;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: background 0.3s ease;
+        }
+
+        .legal-overlay .close-legal-btn:hover {
+            background: #2C5F8A;
+        }
+
+        /* Ocultar todo el contenido de la página cuando el overlay está activo */
+        body.legal-active .vip-header,
+        body.legal-active .gallery,
+        body.legal-active .social-bar-container,
+        body.legal-active .footer-general,
+        body.legal-active .protection-notice {
+            display: none;
+        }
+
+        /* Asegurar que el body no tenga padding cuando el overlay está activo */
+        body.legal-active {
+            padding: 0;
+            margin: 0;
+            background: white;
+        }
     </style>
 </head>
 <body>
@@ -494,11 +598,45 @@
     <footer class="footer-general">
         <p>Copyright © Powered By ElectroCell JM ES 2025</p>
         <p>TODOS LOS DERECHOS RESERVADOS</p>
-        <p><a href="https://sites.google.com/view/electrocelljm/p%C3%A1gina-principal" target="_blank" rel="noopener noreferrer">AVISO LEGAL</a></p>
+        <p><a href="#" id="openLegalBtn">AVISO LEGAL</a></p>
     </footer>
 
     <!-- Aviso de protección -->
     <div class="protection-notice">🔒 Contenido Protegido</div>
+
+    <!-- ========================================== -->
+    <!-- OVERLAY DEL AVISO LEGAL (PANTALLA COMPLETA) -->
+    <!-- ========================================== -->
+    <div class="legal-overlay" id="legalOverlay">
+        <div class="legal-content">
+            <h1>📝 Aviso Legal: Propiedad Intelectual y Uso del Contenido</h1>
+
+            <h2>1. Propiedad Intelectual del Contenido Web</h2>
+            <p>Todo el contenido que se presenta en la página web del taller ElectroCell JM ES (incluyendo, sin limitación, textos, artículos, guías de reparación, fotografías, logotipos, diseños, código fuente, vídeos, gráficos e imágenes) es propiedad exclusiva de ElectroCell JM ES o de terceros que han autorizado su uso, y está protegido por las leyes vigentes de propiedad intelectual e industrial de El Salvador y tratados internacionales.</p>
+
+            <h2>2. Prohibición de Reproducción y Reutilización</h2>
+            <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública, puesta a disposición, transformación, o cualquier otra forma de explotación, total o parcial, de los contenidos de este sitio web para fines comerciales o no comerciales, sin la previa autorización expresa y por escrito de ElectroCell JM ES.</p>
+            <p><strong>Contenido Expresamente Protegido:</strong></p>
+            <ul>
+                <li>La copia o descarga de fotografías o videos que muestren procesos de reparación, piezas, o resultados de trabajos realizados por el taller.</li>
+                <li>La reproducción de textos, artículos o guías informativas generadas por el taller con fines comerciales o de creación de contenido similar.</li>
+                <li>El uso de cualquier elemento gráfico (logotipos, iconos) con fines de identificación de negocios ajenos.</li>
+            </ul>
+
+            <h2>3. Uso Permitido</h2>
+            <p>El usuario se compromete a utilizar la información y contenidos de la web de forma lícita y con respeto a los derechos de propiedad intelectual e industrial de ElectroCell JM ES. El usuario solo podrá acceder y visualizar el contenido para su uso personal y privado, nunca para su explotación o reutilización en otros sitios web, medios digitales o publicaciones físicas.</p>
+
+            <h2>4. Consecuencias Legales</h2>
+            <p>El incumplimiento de lo dispuesto en la presente cláusula facultará a ElectroCell JM ES a ejercer las acciones legales que correspondan, incluyendo la reclamación de daños y perjuicios, contra quienes infrinjan sus derechos de propiedad intelectual e industrial.</p>
+
+            <div class="copyright">
+                Copyright © Powered By ElectroCell JM ES 2025<br>
+                TODOS LOS DERECHOS RESERVADOS
+            </div>
+
+            <button class="close-legal-btn" id="closeLegalBtn">✕ Cerrar Aviso Legal</button>
+        </div>
+    </div>
 
     <!-- ========================================== -->
     <!-- SCRIPT DE PROTECCIÓN TOTAL                 -->
@@ -687,6 +825,49 @@
         });
 
         console.log('✅ Galería cargada con protección total.');
+
+        // ============================================================
+        // CONTROL DEL AVISO LEGAL EN PANTALLA COMPLETA
+        // ============================================================
+        const openBtn = document.getElementById('openLegalBtn');
+        const overlay = document.getElementById('legalOverlay');
+        const closeBtn = document.getElementById('closeLegalBtn');
+
+        function openLegal() {
+            overlay.classList.add('active');
+            document.body.classList.add('legal-active');
+            // Desplazar al inicio
+            overlay.scrollTop = 0;
+        }
+
+        function closeLegal() {
+            overlay.classList.remove('active');
+            document.body.classList.remove('legal-active');
+        }
+
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLegal();
+        });
+
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeLegal();
+        });
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeLegal();
+            }
+        });
+
+        // Cerrar haciendo clic fuera del contenido (opcional, desactivado para evitar cierres accidentales)
+        // overlay.addEventListener('click', function(e) {
+        //     if (e.target === overlay) {
+        //         closeLegal();
+        //     }
+        // });
     </script>
 
 </body>
