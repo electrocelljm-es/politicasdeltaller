@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>ELECTROCELL JM ES - Protección Total</title>
+    <!-- IMPORTACIÓN DE FUENTE CURSIVA ENLAZADA -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         /* ============================================ */
         /* RESET Y ESTILOS BASE                         */
@@ -61,12 +65,13 @@
             gap: 6px;
             background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             color: #0d1b2a;
-            font-size: clamp(0.6rem, 3.2vw, 0.9rem);
-            font-weight: 900;
-            padding: 5px 14px;
+            font-size: clamp(0.95rem, 3.8vw, 1.3rem); /* Tamaño ajustado para visibilidad de cursiva */
+            font-weight: 700;
+            font-family: 'Dancing Script', 'Brush Script MT', cursive; /* FUENTE CURSIVA ENLAZADA APLICADA */
+            text-transform: none; /* Desactivado para permitir el enlace correcto letra con letra */
+            padding: 5px 18px;
             border-radius: 50px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0px; /* Las letras necesitan 0px para enlazarse adecuadamente */
             margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 215, 0, 0.4);
             border: 1px solid #FFFFFF;
@@ -409,13 +414,13 @@
     <!-- ENCABEZADO PREMIUM VIP                     -->
     <!-- ========================================== -->
     <header class="vip-header">
-        <span class="vip-badge">★ 𝐷𝑖𝑜𝑠 𝑀𝑖 𝑀𝑒𝑗𝑜𝑟 𝐼𝑛𝑠𝑡𝑟𝑢𝑐𝑡𝑜𝑟 ★</span>
+        <span class="vip-badge">★ Dios Mi Mejor Instructor ★</span>
         <h1>𝐄𝐥𝐞𝐜𝐭𝐫𝐨𝐂𝐞𝐥𝐥 𝐉𝐌 𝐄𝐥 𝐒𝐚𝐥𝐯𝐚𝐝𝐨𝐫</h1>
         <p>Términos y Condiciones de Servicio</p>
     </header>
 
     <!-- ========================================== -->
-    <!-- GALERÍA DE 5 IMÁGENES                      -->
+    <!-- GALERÍA DE 5 IMÁGENES                       -->
     <!-- ========================================== -->
     <div class="gallery" id="imageGallery">
         <div class="loading-msg">
