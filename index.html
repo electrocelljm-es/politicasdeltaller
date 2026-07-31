@@ -434,20 +434,21 @@
             max-width: 900px;
             margin: 0 auto;
             line-height: 1.7;
-            font-size: 1.05rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem); /* Redimensionado para móvil y escritorio */
         }
 
         .legal-overlay .legal-content h1 {
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
             color: #0d1b2a;
             border-bottom: 3px solid #4A90D9;
             padding-bottom: 12px;
             margin-bottom: 25px;
             font-weight: 800;
+            text-align: center; /* Centrado para que se vea mejor en móviles */
         }
 
         .legal-overlay .legal-content h2 {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
             color: #0d1b2a;
             margin-top: 28px;
             margin-bottom: 10px;
@@ -457,6 +458,7 @@
         .legal-overlay .legal-content p {
             margin-bottom: 14px;
             text-align: justify;
+            word-break: break-word; /* Evita que se salga el texto en móviles */
         }
 
         .legal-overlay .legal-content ul {
@@ -476,6 +478,12 @@
             text-align: center;
         }
 
+        /* ESTILO CELESTE BRILLANTE PARA LAS MENCIONES */
+        .legal-content .highlight-blue {
+            color: #00AEEF; /* Azul/Celeste Brillante */
+            font-weight: 700;
+        }
+
         .legal-overlay .close-legal-btn {
             display: block;
             margin: 30px auto 10px;
@@ -484,7 +492,7 @@
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             font-weight: 700;
             cursor: pointer;
             pointer-events: auto;
@@ -612,10 +620,10 @@
             <h1>📝 Aviso Legal: Propiedad Intelectual y Uso del Contenido</h1>
 
             <h2>1. Propiedad Intelectual del Contenido Web</h2>
-            <p>Todo el contenido que se presenta en la página web del taller ElectroCell JM ES (incluyendo, sin limitación, textos, artículos, guías de reparación, fotografías, logotipos, diseños, código fuente, vídeos, gráficos e imágenes) es propiedad exclusiva de ElectroCell JM ES o de terceros que han autorizado su uso, y está protegido por las leyes vigentes de propiedad intelectual e industrial de El Salvador y tratados internacionales.</p>
+            <p>Todo el contenido que se presenta en la página web del taller <span class="highlight-blue">ElectroCell JM ES</span> (incluyendo, sin limitación, textos, artículos, guías de reparación, fotografías, logotipos, diseños, código fuente, vídeos, gráficos e imágenes) es propiedad exclusiva de <span class="highlight-blue">ElectroCell JM ES</span> o de terceros que han autorizado su uso, y está protegido por las leyes vigentes de propiedad intelectual e industrial de El Salvador y tratados internacionales.</p>
 
             <h2>2. Prohibición de Reproducción y Reutilización</h2>
-            <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública, puesta a disposición, transformación, o cualquier otra forma de explotación, total o parcial, de los contenidos de este sitio web para fines comerciales o no comerciales, sin la previa autorización expresa y por escrito de ElectroCell JM ES.</p>
+            <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública, puesta a disposición, transformación, o cualquier otra forma de explotación, total o parcial, de los contenidos de este sitio web para fines comerciales o no comerciales, sin la previa autorización expresa y por escrito de <span class="highlight-blue">ElectroCell JM ES</span>.</p>
             <p><strong>Contenido Expresamente Protegido:</strong></p>
             <ul>
                 <li>La copia o descarga de fotografías o videos que muestren procesos de reparación, piezas, o resultados de trabajos realizados por el taller.</li>
@@ -624,13 +632,13 @@
             </ul>
 
             <h2>3. Uso Permitido</h2>
-            <p>El usuario se compromete a utilizar la información y contenidos de la web de forma lícita y con respeto a los derechos de propiedad intelectual e industrial de ElectroCell JM ES. El usuario solo podrá acceder y visualizar el contenido para su uso personal y privado, nunca para su explotación o reutilización en otros sitios web, medios digitales o publicaciones físicas.</p>
+            <p>El usuario se compromete a utilizar la información y contenidos de la web de forma lícita y con respeto a los derechos de propiedad intelectual e industrial de <span class="highlight-blue">ElectroCell JM ES</span>. El usuario solo podrá acceder y visualizar el contenido para su uso personal y privado, nunca para su explotación o reutilización en otros sitios web, medios digitales o publicaciones físicas.</p>
 
             <h2>4. Consecuencias Legales</h2>
-            <p>El incumplimiento de lo dispuesto en la presente cláusula facultará a ElectroCell JM ES a ejercer las acciones legales que correspondan, incluyendo la reclamación de daños y perjuicios, contra quienes infrinjan sus derechos de propiedad intelectual e industrial.</p>
+            <p>El incumplimiento de lo dispuesto en la presente cláusula facultará a <span class="highlight-blue">ElectroCell JM ES</span> a ejercer las acciones legales que correspondan, incluyendo la reclamación de daños y perjuicios, contra quienes infrinjan sus derechos de propiedad intelectual e industrial.</p>
 
             <div class="copyright">
-                Copyright © Powered By ElectroCell JM ES 2025<br>
+                Copyright © Powered By <span class="highlight-blue">ElectroCell JM ES</span> 2025<br>
                 TODOS LOS DERECHOS RESERVADOS
             </div>
 
@@ -834,6 +842,12 @@
         const closeBtn = document.getElementById('closeLegalBtn');
 
         function openLegal() {
+            // Guardamos el estado actual en el historial del navegador
+            // para que el botón "Atrás" sepa que debe cerrar el overlay
+            if (!overlay.classList.contains('active')) {
+                history.pushState({ legalOverlayOpen: true }, '');
+            }
+            
             overlay.classList.add('active');
             document.body.classList.add('legal-active');
             // Desplazar al inicio
@@ -858,6 +872,14 @@
         // Cerrar con tecla ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeLegal();
+            }
+        });
+
+        // CAPTURAR EL BOTÓN DE RETROCEDER (ATRÁS) DEL NAVEGADOR
+        window.addEventListener('popstate', function(e) {
+            // Si el overlay está abierto y el usuario presiona "Atrás", lo cerramos
+            if (overlay.classList.contains('active')) {
                 closeLegal();
             }
         });
