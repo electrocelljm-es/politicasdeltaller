@@ -39,23 +39,50 @@
         }
 
         /* ============================================ */
-        /* ENCABEZADO VIP RESTRUCTURADO (SIN FONDO)     */
+        /* NUEVO ENCABEZADO VIP REDISEÑADO             */
         /* ============================================ */
         .vip-header {
             width: 100%;
             max-width: 1300px;
-            padding: 10px 5px 20px 5px;
+            padding: 30px 10px 20px 10px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
             pointer-events: none;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        /* Línea decorativa superior e inferior */
+        .vip-header::before,
+        .vip-header::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 400px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4A90D9, #BF953F, #4A90D9, transparent);
+            border-radius: 2px;
+        }
+
+        .vip-header::before {
+            top: 0;
+        }
+
+        .vip-header::after {
+            bottom: 0;
+        }
+
+        /* Contenedor del contenido para alineación perfecta */
+        .vip-header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
         }
 
         .vip-badge {
@@ -63,52 +90,57 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
             color: #0d1b2a;
-            font-size: clamp(0.95rem, 3.8vw, 1.3rem);
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
             font-weight: 700;
             font-family: 'Dancing Script', 'Brush Script MT', cursive;
             text-transform: none;
-            padding: 5px 18px;
+            padding: 6px 22px;
             border-radius: 50px;
             letter-spacing: 0px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 215, 0, 0.4);
-            border: 1px solid #FFFFFF;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             white-space: nowrap;
             max-width: 100%;
         }
 
         .vip-header h1 {
-            font-size: clamp(0.95rem, 5.2vw, 2.6rem);
+            font-size: clamp(1.5rem, 6vw, 3.5rem);
             font-weight: 900;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            background: linear-gradient(180deg, #FFFFFF 30%, #A5C9EB 100%);
+            margin: 5px 0;
+            background: linear-gradient(135deg, #1A3A5C 20%, #4A90D9 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 2px 4px rgba(255,255,255,0.5));
             position: relative;
             z-index: 2;
             white-space: nowrap;
             width: 100%;
             text-align: center;
+            line-height: 1.1;
         }
 
         .vip-header p {
-            font-size: clamp(0.65rem, 3.6vw, 1.1rem);
-            color: #0077B6;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: clamp(0.7rem, 2.2vw, 1.1rem);
+            color: #1A3A5C;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: none;
             position: relative;
             z-index: 2;
             white-space: nowrap;
             width: 100%;
             text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 4px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+            display: inline-block;
+            width: auto;
         }
 
         /* ============================================ */
@@ -246,14 +278,16 @@
         }
 
         .reviews-header h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 4.5vw, 2.5rem);
+            white-space: nowrap;
             font-weight: 800;
             color: #0d1b2a;
             text-shadow: 0 2px 4px rgba(255,255,255,0.6);
         }
 
         .reviews-header p {
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            white-space: nowrap;
             color: #1A3A5C;
             font-weight: 600;
         }
@@ -672,12 +706,14 @@
 <body>
 
     <!-- ========================================== -->
-    <!-- ENCABEZADO PREMIUM VIP                     -->
+    <!-- NUEVO ENCABEZADO PREMIUM VIP                -->
     <!-- ========================================== -->
     <header class="vip-header">
-        <span class="vip-badge">★ Dios Mi Mejor Instructor ★</span>
-        <h1>𝐄𝐥𝐞𝐜𝐭𝐫𝐨𝐂𝐞𝐥𝐥 𝐉𝐌 𝐄𝐥 𝐒𝐚𝐥𝐯𝐚𝐝𝐨𝐫</h1>
-        <p>Términos y Condiciones de Servicio</p>
+        <div class="vip-header-content">
+            <span class="vip-badge">★ Dios Mi Mejor Instructor ★</span>
+            <h1>𝐄𝐥𝐞𝐜𝐭𝐫𝐨𝐂𝐞𝐥𝐥 𝐉𝐌 𝐄𝐥 𝐒𝐚𝐥𝐯𝐚𝐝𝐨𝐫</h1>
+            <p>Términos y Condiciones de Servicio</p>
+        </div>
     </header>
 
     <!-- ========================================== -->
@@ -689,14 +725,13 @@
         </div>
     </div>
 
-        <!-- ========================================== -->
+    <!-- ========================================== -->
     <!-- SECCIÓN DE CALIFICACIONES DE CLIENTES       -->
     <!-- ========================================== -->
     <div class="reviews-container" id="reviews-section">
         <div class="reviews-header">
-            <!-- REDIMENSIONADO PARA QUE SIEMPRE ESTÉN EN 1 SOLA LÍNEA SEGÚN EL TAMAÑO DE PANTALLA -->
-            <h2 style="font-size: clamp(1.2rem, 4.5vw, 2.5rem); white-space: nowrap;">⭐ Lo que Dicen Nuestros Clientes</h2>
-            <p style="font-size: clamp(0.8rem, 2vw, 1.2rem); white-space: nowrap;">Calificaciones Verificadas de Nuestros Servicios</p>
+            <h2>⭐ Lo que Dicen Nuestros Clientes</h2>
+            <p>Calificaciones Verificadas de Nuestros Servicios</p>
         </div>
         
         <div class="reviews-scroll-wrapper">
