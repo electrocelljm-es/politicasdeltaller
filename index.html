@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- HABILITADO EL ZOOM EN CUALQUIER NAVEGADOR SIN ROMPER DISEÑO -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ELECTROCELL JM ES - Protección Total</title>
     <!-- IMPORTACIÓN DE FUENTE CURSIVA ENLAZADA -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -298,7 +299,7 @@
             justify-content: center;
             position: relative;
             pointer-events: auto;
-            padding: 0; /* Eliminado padding para que los botones queden afuera */
+            padding: 0;
         }
 
         .reviews-track-container {
@@ -341,8 +342,15 @@
             letter-spacing: 2px;
         }
 
+        /* ESTILO PARA EL BORDE NEGRO DELGADO DE LAS ESTRELLAS DORADAS */
         .review-stars .star-filled {
             color: #FFD700; /* Dorado brillante */
+            text-shadow: 
+                0 0 1px #000, 
+                0 0 1px #000, 
+                0 0 1px #000, 
+                0 0 1px #000; /* Genera el contorno negro */
+            -webkit-text-stroke: 0.6px #000; /* Borde fino para navegadores Webkit */
         }
 
         .review-text {
@@ -369,7 +377,7 @@
             font-weight: 400;
         }
 
-        /* Botones del carrusel - CORREGIDOS PARA NO ENCIMARSE NUNCA */
+        /* Botones del carrusel */
         .scroll-btn {
             position: absolute;
             top: 50%;
@@ -397,11 +405,9 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        /* Posición ajustada hacia AFUERA del contenedor para que no toque el texto */
         .scroll-btn.prev { left: -50px; }
         .scroll-btn.next { right: -50px; }
 
-        /* Ajuste para móviles para que no se salgan de la pantalla */
         @media (max-width: 500px) {
             .scroll-btn.prev { left: -15px; }
             .scroll-btn.next { right: -15px; }
