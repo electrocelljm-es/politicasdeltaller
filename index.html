@@ -269,7 +269,7 @@
             margin: 40px auto 20px auto;
             padding: 0 10px;
             position: relative;
-            pointer-events: none; /* Aislar eventos */
+            pointer-events: none;
         }
 
         .reviews-header {
@@ -298,7 +298,7 @@
             justify-content: center;
             position: relative;
             pointer-events: auto;
-            padding: 0 35px; /* Agregado para dar espacio a los botones y evitar que se encimen */
+            padding: 0; /* Eliminado padding para que los botones queden afuera */
         }
 
         .reviews-track-container {
@@ -369,7 +369,7 @@
             font-weight: 400;
         }
 
-        /* Botones del carrusel - CORREGIDO PARA NO ENCIMARSE */
+        /* Botones del carrusel - CORREGIDOS PARA NO ENCIMARSE NUNCA */
         .scroll-btn {
             position: absolute;
             top: 50%;
@@ -397,20 +397,24 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        /* Posición ajustada para que queden afuera de las tarjetas */
-        .scroll-btn.prev { left: 0px; }
-        .scroll-btn.next { right: 0px; }
+        /* Posición ajustada hacia AFUERA del contenedor para que no toque el texto */
+        .scroll-btn.prev { left: -50px; }
+        .scroll-btn.next { right: -50px; }
 
-        /* En móviles pequeños, se ajustan ligeramente */
+        /* Ajuste para móviles para que no se salgan de la pantalla */
+        @media (max-width: 500px) {
+            .scroll-btn.prev { left: -15px; }
+            .scroll-btn.next { right: -15px; }
+        }
+
         @media (max-width: 400px) {
-            .reviews-scroll-wrapper {
-                padding: 0 25px;
-            }
             .scroll-btn {
                 width: 34px;
                 height: 34px;
                 font-size: 1rem;
             }
+            .scroll-btn.prev { left: -10px; }
+            .scroll-btn.next { right: -10px; }
         }
 
         /* ============================================ */
@@ -733,8 +737,8 @@
     <!-- ========================================== -->
     <div class="reviews-container" id="reviews-section">
         <div class="reviews-header">
-            <h2>⭐ Lo Que Dicen Nuestros Clientes</h2>
-            <p>Calificaciones Verificadas De Nuestros Servicios</p>
+            <h2>⭐ Lo que Dicen Nuestros Clientes</h2>
+            <p>Calificaciones Verificadas de Nuestros Servicios</p>
         </div>
         
         <div class="reviews-scroll-wrapper">
