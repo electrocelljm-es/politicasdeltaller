@@ -229,6 +229,154 @@
         }
 
         /* ============================================ */
+        /* SECCIÓN DE CALIFICACIONES DESLIZANTES       */
+        /* ============================================ */
+        .reviews-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 40px auto 20px auto;
+            padding: 0 10px;
+            position: relative;
+            pointer-events: none; /* Aislar eventos */
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .reviews-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: #0d1b2a;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.6);
+        }
+
+        .reviews-header p {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #1A3A5C;
+            font-weight: 600;
+        }
+
+        .reviews-scroll-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .reviews-track-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 10px 0;
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 25px;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .review-card {
+            min-width: 280px;
+            max-width: 320px;
+            flex: 0 0 auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 20px 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 40, 80, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            pointer-events: auto;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 40, 80, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .review-stars {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .review-stars .star-filled {
+            color: #FFD700; /* Dorado brillante */
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: #1A3A5C;
+            line-height: 1.5;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #0d1b2a;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .review-author::before {
+            content: '—';
+            color: #4A90D9;
+            font-weight: 400;
+        }
+
+        /* Botones del carrusel */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 58, 92, 0.8);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            pointer-events: auto;
+        }
+
+        .scroll-btn:hover {
+            background: #4A90D9;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .scroll-btn.prev { left: -10px; }
+        .scroll-btn.next { right: -10px; }
+
+        /* Ocultar botones en móviles muy pequeños si estorban */
+        @media (max-width: 400px) {
+            .scroll-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 1rem;
+            }
+            .scroll-btn.prev { left: -5px; }
+            .scroll-btn.next { right: -5px; }
+        }
+
+        /* ============================================ */
         /* BARRA DE REDES SOCIALES (ABAJO DE IMÁGENES)  */
         /* ============================================ */
         .social-bar-container {
@@ -506,6 +654,7 @@
         /* Ocultar todo el contenido de la página cuando el overlay está activo */
         body.legal-active .vip-header,
         body.legal-active .gallery,
+        body.legal-active .reviews-container, /* Ocultar reseñas cuando el aviso legal está abierto */
         body.legal-active .social-bar-container,
         body.legal-active .footer-general,
         body.legal-active .protection-notice {
@@ -537,6 +686,118 @@
     <div class="gallery" id="imageGallery">
         <div class="loading-msg">
             ⏳ Cargando imágenes...
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE CALIFICACIONES DE CLIENTES       -->
+    <!-- ========================================== -->
+    <div class="reviews-container" id="reviews-section">
+        <div class="reviews-header">
+            <h2>⭐ Lo que dicen nuestros clientes</h2>
+            <p>Calificaciones verificadas de nuestros servicios</p>
+        </div>
+        
+        <div class="reviews-scroll-wrapper">
+            <button class="scroll-btn prev" id="scrollPrev" aria-label="Anterior">❮</button>
+            
+            <div class="reviews-track-container">
+                <div class="reviews-track" id="reviewsTrack">
+                    
+                    <!-- TARJETA 1 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"Excelente servicio, repararon mi celular en tiempo récord y quedó como nuevo. Muy recomendados."</p>
+                        <div class="review-author">Carlos Méndez</div>
+                    </div>
+
+                    <!-- TARJETA 2 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"La mejor atención al cliente. Me explicaron todo el proceso de reparación detalladamente."</p>
+                        <div class="review-author">María Fernanda R.</div>
+                    </div>
+
+                    <!-- TARJETA 3 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span>★</span>
+                        </div>
+                        <p class="review-text">"Muy contento con la garantía que ofrecen. Mi pantalla quedó perfecta, sin detalles."</p>
+                        <div class="review-author">José Alberto G.</div>
+                    </div>
+
+                    <!-- TARJETA 4 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"Profesionales y confiables. Les llevé mi equipo y cumplieron con los tiempos acordados."</p>
+                        <div class="review-author">Ana Lucía P.</div>
+                    </div>
+
+                    <!-- TARJETA 5 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"Sin duda la mejor tienda de reparaciones en la zona. Volté a tiempo y con calidad."</p>
+                        <div class="review-author">Diego Armando C.</div>
+                    </div>
+
+                    <!-- TARJETA 6 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span>★</span>
+                        </div>
+                        <p class="review-text">"Me ayudaron con una falla compleja en mi tablet. El precio fue justo y el resultado excelente."</p>
+                        <div class="review-author">Laura Sofía M.</div>
+                    </div>
+
+                    <!-- TARJETA 7 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"Muy buena experiencia. Tienen repuestos originales y el personal es muy amable."</p>
+                        <div class="review-author">Pedro Pablo R.</div>
+                    </div>
+
+                    <!-- TARJETA 8 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"Excelente trabajo, cumplieron con el protocolo establecido y me mantuvieron informado."</p>
+                        <div class="review-author">Daniela Alejandra</div>
+                    </div>
+
+                    <!-- TARJETA 9 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+                        </div>
+                        <p class="review-text">"100% recomendado. Mi iPhone quedó impecable, parecía nuevo después de la reparación."</p>
+                        <div class="review-author">Gabriel Esteban</div>
+                    </div>
+
+                    <!-- TARJETA 10 -->
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span>★</span>
+                        </div>
+                        <p class="review-text">"El servicio de diagnóstico es rápido y preciso. Gracias por su honestidad y transparencia."</p>
+                        <div class="review-author">Valentina Paz</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="scroll-btn next" id="scrollNext" aria-label="Siguiente">❯</button>
         </div>
     </div>
 
@@ -890,6 +1151,118 @@
         //         closeLegal();
         //     }
         // });
+
+        // ============================================================
+        // CONTROL DEL CARRUSEL DE RESEÑAS
+        // ============================================================
+        const track = document.getElementById('reviewsTrack');
+        const prevBtn = document.getElementById('scrollPrev');
+        const nextBtn = document.getElementById('scrollNext');
+
+        let currentIndex = 0;
+        let cardWidth = 0;
+        let visibleCards = 0;
+
+        function updateCarouselDimensions() {
+            if (track.children.length > 0) {
+                // Calcular el ancho de la tarjeta más el gap
+                const firstCard = track.children[0];
+                const cardStyle = window.getComputedStyle(firstCard);
+                const cardFullWidth = firstCard.offsetWidth + parseInt(cardStyle.marginRight) + 25; // 25px de gap del flex
+                
+                const containerWidth = track.parentElement.offsetWidth;
+                // Calcular cuántas tarjetas caben (mínimo 1)
+                visibleCards = Math.max(1, Math.floor(containerWidth / cardFullWidth));
+                cardWidth = cardFullWidth;
+                
+                // Asegurar que currentIndex no se salga del rango
+                const maxIndex = Math.max(0, track.children.length - visibleCards);
+                if (currentIndex > maxIndex) {
+                    currentIndex = maxIndex;
+                }
+            }
+        }
+
+        function scrollToIndex() {
+            const maxIndex = Math.max(0, track.children.length - visibleCards);
+            // Limitar el índice
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            
+            const offset = currentIndex * (cardWidth);
+            track.style.transform = `translateX(-${offset}px)`;
+        }
+
+        function nextSlide() {
+            const maxIndex = Math.max(0, track.children.length - visibleCards);
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                // Si estamos al final, volver al inicio (Carrusel circular infinito)
+                currentIndex = 0;
+            }
+            scrollToIndex();
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                // Si estamos al inicio, ir al final
+                const maxIndex = Math.max(0, track.children.length - visibleCards);
+                currentIndex = maxIndex;
+            }
+            scrollToIndex();
+        }
+
+        // Inicializar eventos
+        window.addEventListener('load', () => {
+            updateCarouselDimensions();
+            scrollToIndex();
+        });
+
+        window.addEventListener('resize', () => {
+            updateCarouselDimensions();
+            scrollToIndex();
+        });
+
+        // Listener de botones
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+        // Añadir soporte táctil (Deslizar con el dedo en móviles)
+        let startX = 0;
+        let isDragging = false;
+
+        const trackContainer = document.querySelector('.reviews-track-container');
+
+        if (trackContainer) {
+            trackContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            trackContainer.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const currentX = e.touches[0].clientX;
+                const diffX = startX - currentX;
+                
+                // Si el usuario desliza más de 50px, cambiamos de tarjeta
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextSlide(); // Deslizar a la izquierda -> Siguiente
+                    } else {
+                        prevSlide(); // Deslizar a la derecha -> Anterior
+                    }
+                    isDragging = false; // Evitar múltiples cambios en un solo deslizamiento
+                }
+            });
+
+            trackContainer.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+        
     </script>
 
 </body>
