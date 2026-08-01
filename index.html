@@ -298,6 +298,7 @@
             justify-content: center;
             position: relative;
             pointer-events: auto;
+            padding: 0 35px; /* Agregado para dar espacio a los botones y evitar que se encimen */
         }
 
         .reviews-track-container {
@@ -368,7 +369,7 @@
             font-weight: 400;
         }
 
-        /* Botones del carrusel */
+        /* Botones del carrusel - CORREGIDO PARA NO ENCIMARSE */
         .scroll-btn {
             position: absolute;
             top: 50%;
@@ -396,18 +397,20 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .scroll-btn.prev { left: -10px; }
-        .scroll-btn.next { right: -10px; }
+        /* Posición ajustada para que queden afuera de las tarjetas */
+        .scroll-btn.prev { left: 0px; }
+        .scroll-btn.next { right: 0px; }
 
-        /* Ocultar botones en móviles muy pequeños si estorban */
+        /* En móviles pequeños, se ajustan ligeramente */
         @media (max-width: 400px) {
+            .reviews-scroll-wrapper {
+                padding: 0 25px;
+            }
             .scroll-btn {
                 width: 34px;
                 height: 34px;
                 font-size: 1rem;
             }
-            .scroll-btn.prev { left: -5px; }
-            .scroll-btn.next { right: -5px; }
         }
 
         /* ============================================ */
@@ -730,8 +733,8 @@
     <!-- ========================================== -->
     <div class="reviews-container" id="reviews-section">
         <div class="reviews-header">
-            <h2>⭐ Lo que Dicen Nuestros Clientes</h2>
-            <p>Calificaciones Verificadas de Nuestros Servicios</p>
+            <h2>⭐ Lo Que Dicen Nuestros Clientes</h2>
+            <p>Calificaciones Verificadas De Nuestros Servicios</p>
         </div>
         
         <div class="reviews-scroll-wrapper">
