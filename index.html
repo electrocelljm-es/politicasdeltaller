@@ -313,14 +313,12 @@
             display: flex;
             gap: 25px;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            width: 100%;
         }
 
-        /* REDIMENSIONADO PARA ESCRITORIO SIN QUE SE CORTEN */
         .review-card {
-            flex: 1 1 calc(33.333% - 25px); /* 3 tarjetas en escritorio */
             min-width: 280px;
-            max-width: 100%;
+            max-width: 320px;
+            flex: 0 0 auto;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
             padding: 20px 25px;
@@ -329,13 +327,6 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             pointer-events: auto;
-        }
-
-        /* Ajuste en pantallas muy grandes para mostrar 4 tarjetas completas sin cortar */
-        @media (min-width: 1200px) {
-            .review-card {
-                flex: 1 1 calc(25% - 25px); /* 4 tarjetas en pantallas grandes */
-            }
         }
 
         .review-card:hover {
@@ -349,20 +340,17 @@
             color: #ddd;
             margin-bottom: 10px;
             letter-spacing: 2px;
-            display: flex;
-            gap: 2px;
         }
 
-        /* ESTILO VIP PREMIUM 3D: FONDO ORO + CONTORNO NEGRO */
+        /* ESTILO PARA EL BORDE NEGRO DELGADO DE LAS ESTRELLAS DORADAS */
         .review-stars .star-filled {
-            /* Fondo Oro Metálico 3D */
-            background: radial-gradient(circle at 30% 30%, #FFE066, #D4AF37, #996515);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            /* Contorno Negro Delgado */
-            -webkit-text-stroke: 0.8px #000000;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(212, 175, 55, 0.6); /* Brillo Premium */
+            color: #FFD700; /* Dorado brillante */
+            text-shadow: 
+                0 0 1px #000, 
+                0 0 1px #000, 
+                0 0 1px #000, 
+                0 0 1px #000; /* Genera el contorno negro */
+            -webkit-text-stroke: 0.6px #000; /* Borde fino para navegadores Webkit */
         }
 
         .review-text {
