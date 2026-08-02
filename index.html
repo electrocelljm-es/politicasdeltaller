@@ -315,42 +315,48 @@
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
+        /* TARJETAS LIBRES, SIN SOMBRAS Y PERFECTAMENTE CENTRADAS */
         .review-card {
             min-width: 280px;
             max-width: 320px;
             flex: 0 0 auto;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            padding: 20px 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 40, 80, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            /* Eliminados los estilos de caja para que floten libres */
+            background: transparent !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            
+            padding: 20px 15px; /* Un poco menos de padding para que se vea más integrado */
+            border-radius: 0;
+            transition: transform 0.2s ease;
             pointer-events: auto;
         }
 
         .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(0, 40, 80, 0.15);
-            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px); /* Solo un pequeño movimiento al pasar el mouse */
         }
 
         .review-stars {
             font-size: 1.3rem;
             color: #ddd;
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Ajustado el margen inferior */
             letter-spacing: 2px;
+            display: flex;
+            justify-content: center; /* Centrado perfecto de las estrellas */
+            gap: 2px;
         }
 
         /* ESTILO PARA EL BORDE NEGRO DELGADO DE LAS ESTRELLAS DORADAS */
         .review-stars .star-filled {
-            color: #FFD700; /* Dorado brillante */
-            text-shadow: 
-                0 0 1px #000, 
-                0 0 1px #000, 
-                0 0 1px #000, 
-                0 0 1px #000; /* Genera el contorno negro */
-            -webkit-text-stroke: 0.6px #000; /* Borde fino para navegadores Webkit */
+            /* Fondo Oro Metálico 3D */
+            background: radial-gradient(circle at 30% 30%, #FFE066, #D4AF37, #996515);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* Contorno Negro Delgado */
+            -webkit-text-stroke: 0.8px #000000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(212, 175, 55, 0.6); /* Brillo Premium */
         }
 
         .review-text {
@@ -360,6 +366,7 @@
             font-weight: 500;
             margin-bottom: 12px;
             font-style: italic;
+            text-align: center; /* Centrado para una apariencia más limpia y libre */
         }
 
         .review-author {
@@ -368,6 +375,7 @@
             font-size: 1rem;
             display: flex;
             align-items: center;
+            justify-content: center; /* Centrado del nombre */
             gap: 8px;
         }
 
